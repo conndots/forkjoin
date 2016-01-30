@@ -79,9 +79,8 @@ public class BatchParrallelWordCountTask extends RecursiveTask<ImmutableMap<Stri
                                     pagesListBuilder.add(fetcherTask.join());
                                 });
 
-                                new PageWordsCountWorker(pagesListBuilder.build(),
-                                        textSpliter).fork();
-                                return null;
+                                return new PageWordsCountWorker(pagesListBuilder.build(),
+                                        textSpliter).invoke();
                             }
                         }.fork());
                     }
